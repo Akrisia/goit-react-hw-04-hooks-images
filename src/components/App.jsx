@@ -13,12 +13,11 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [imageId, setImageId] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
   const onSubmit = ({ query }) => {
     setQuery(query);
     setPage(1);
-    query && setImages([]);
   };
 
   const handleImages = ({ images, total, loading }) => {

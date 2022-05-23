@@ -8,21 +8,6 @@ export default function ImageGallery({query, page, handleImages, openModal}) {
     const [images, setImages] = useState([]);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        if (!query) {
-            return;
-        };
-        setLoading(true);
-        fetchImages(query, page)
-            .then(response => {
-                setImages(images => [...response.data.hits]);
-                setTotal(response.data.totalHits);
-            })
-            .catch(error => setError(error.message))
-            .finally(() => setLoading(false));
-    }, [query]);
 
     useEffect(() => {
         if (!query) {
@@ -34,14 +19,13 @@ export default function ImageGallery({query, page, handleImages, openModal}) {
                 setImages(images => [...images, ...response.data.hits]);
                 setTotal(response.data.totalHits);
             })
-            .catch(error => setError(error.message))
+            .catch(error => error.message)
             .finally(() => setLoading(false));
-    }, [page]);
-
+    }, [query, page]);
 
     useEffect(() => {
         handleImages({ images, total, loading });
-    });
+    }, [images, total, loading]);
 
     return (
         <ul className={s.gallery}>
