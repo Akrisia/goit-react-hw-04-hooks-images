@@ -11,7 +11,7 @@ export default function Modal({closeModal, children}) {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    });
 
     const handleKeyDown = (event) => {
         event.code === 'Escape' && closeModal();

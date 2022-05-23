@@ -28,7 +28,7 @@ export default function ImageGallery({query, page, handleImages, openModal}) {
 
     useEffect(() => {
         handleImages({ images, total, loading });
-    }, [images, total, loading]);
+    }, [images, total, loading, handleImages]);
 
     return (
         <ul className={s.gallery}>
