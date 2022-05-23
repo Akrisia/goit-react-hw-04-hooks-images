@@ -16,7 +16,10 @@ export default function ImageGallery({query, page, handleImages, openModal}) {
         setLoading(true);
         fetchImages(query, page)
             .then(response => {
-                setImages(images => [...images, ...response.data.hits]);
+                setImages(images =>
+                    page === 1
+                        ? response.data.hits
+                        : [...images, ...response.data.hits]);
                 setTotal(response.data.totalHits);
             })
             .catch(error => error.message)
